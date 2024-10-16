@@ -28,6 +28,7 @@ export default class ShoppingCart {
 
     renderCartContents() {
         const cartItems = getLocalStorage(this.key) || [];
+        notifyCartEmpty(cartItems.length)
         // const htmlItems = cartItems.map((item) => cartItemTemplate(item));
         // document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
 
@@ -68,5 +69,18 @@ function calculateTotal(cartItems) {
     );
     itemCountElement.innerHTML = `Items: ${cartItems.length}`;
     totalElement.innerHTML = `Total: $${cartTotal.toFixed(2)}`;
+}
+   
+
+function notifyCartEmpty(c){
+  if(c==0){
+   
+      Swal.fire({
+        title: "warning!",
+        text: "Cart has no iems, add some items to the cart first",
+        icon: "warning"
+      });
+  
+  }
 }
    
